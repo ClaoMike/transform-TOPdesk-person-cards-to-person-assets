@@ -45,3 +45,15 @@ assetProcessor.create_assets(persons_to_be_created)
 # we've reached the end of the script successfully
 logger.newline()
 logger.info("Import successful!")
+
+# TODO
+#
+# 1. Make a function for set operations on lists
+# 2. Add documentation for everything
+# 3. Add a total at the end of the log
+# 4. Send logs somewhere
+# 5. See if you can also generate a markdown log, so that you can hide long data
+# 6. Fix bugs and errors
+# 7. Test everything
+# 8. Publish
+#
