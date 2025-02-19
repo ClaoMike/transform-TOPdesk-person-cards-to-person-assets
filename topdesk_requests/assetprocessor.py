@@ -12,13 +12,6 @@ class AssetProcessor:
     def assets(self):
         return self.__assets
 
-    def generate_assets_url(self):
-        url = f"{ASSETS_ENDPOINT}?&field=name&field=persons"
-        for i in range(len(self.__fields)):
-            url = url + f"&field={self.__fields[i]}"
-
-        return url
-
     def get_assets(self):
         self.__logger.info("Trying to fetch all the person assets!")
 
@@ -26,7 +19,7 @@ class AssetProcessor:
             "Content-Type": "application/json",
         }
 
-        url = self.generate_assets_url()
+        url = self.__generate_assets_url()
 
         self.__logger.info(f"Performing a GET request to {url}!")
         response = requests.get(
@@ -46,10 +39,7 @@ class AssetProcessor:
 
         self.__logger.info("Successfully fetched all the person assets!")
         self.__logger.info(f"Fetched {len(self.__assets)} person assets!")
-        self.log_assets()
-
-    def log_assets(self):
-        self.__logger.dictionary(dict=self.__assets, dict_title="Assets")
+        self.__log_assets()
 
     def get_assets_persons_IDs_as_set(self):
         return {asset["persons"] for asset in self.__assets.values()}
@@ -90,14 +80,24 @@ class AssetProcessor:
         self.__logger.info("Successfully created all the new person assets!")
         self.__logger.newline()
 
-    def create_asset_id(self, person):
+    def __generate_assets_url(self):
+        url = f"{ASSETS_ENDPOINT}?&field=name&field=persons"
+        for i in range(len(self.__fields)):
+            url = url + f"&field={self.__fields[i]}"
+
+        return url
+
+    def __log_assets(self):
+        self.__logger.dictionary(dict=self.__assets, dict_title="Assets")
+
+    def __create_asset_id(self, person):
         name = person["firstName"] + " " + person["surName"] + " - " + person["email"]
         if len(name) > 60: # Asset ID can have at most 61 characters
             name = name[:57] + "..."
 
         return name
 
-    def create_asset(self, person):
+    def __create_asset(self, person):
         payload = {
             "name": self.create_asset_id(person),
             "type_id": "D1C4D1A8-5C35-4981-A352-E25C7DC24D55",

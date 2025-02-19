@@ -12,14 +12,6 @@ class PersonProcessor:
     def persons(self):
         return self.__persons
 
-    def generate_persons_url(self, page_start, page_size):
-        url = f"{PERSONS_ENDPOINT}?pageStart={page_start}&pageSize={page_size}&fields="
-        for i in range(len(self.__fields) - 1):
-            url = url + self.__fields[i] + ","
-        url = url + self.__fields[len(self.__fields) - 1]
-
-        return url
-
     def get_persons_with_fields(self):
         if self.__fields is not None and len(self.__fields) > 0:
             fields_as_string = ", ".join(self.__fields)
@@ -40,7 +32,7 @@ class PersonProcessor:
         while True:
             self.__logger.info(f"Getting page {page_start}")
 
-            url = self.generate_persons_url(page_start=page_start, page_size=page_size)
+            url = self.__generate_persons_url(page_start=page_start, page_size=page_size)
 
             # Performing the request
             self.__logger.info(f"Performing a GET request to {url}!")
@@ -71,10 +63,7 @@ class PersonProcessor:
         self.__logger.info(f"Fetched {len(all_persons)} person cards!")
 
         self.__persons = all_persons
-        self.log_persons()
-
-    def log_persons(self):
-        self.__logger.array(array=self.__persons, array_title="Persons")
+        self.__log_persons()
 
     def filter_persons(self):
         self.__logger.info("Filtering the fetched person cards!")
@@ -88,4 +77,15 @@ class PersonProcessor:
         self.__logger.info("Filtering is done!")
         self.__logger.info(f"Initial number of person cards: {initial_number_of_cards}!")
         self.__logger.info(f"Current number of person cards: {len(self.__persons)}!")
-        self.log_persons()
+        self.__log_persons()
+
+    def __generate_persons_url(self, page_start, page_size):
+        url = f"{PERSONS_ENDPOINT}?pageStart={page_start}&pageSize={page_size}&fields="
+        for i in range(len(self.__fields) - 1):
+            url = url + self.__fields[i] + ","
+        url = url + self.__fields[len(self.__fields) - 1]
+
+        return url
+
+    def __log_persons(self):
+        self.__logger.array(array=self.__persons, array_title="Persons")
