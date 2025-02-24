@@ -48,38 +48,44 @@ class AssetProcessor:
 
     def delete_assets(self, persons_to_be_deleted_IDs_asSet):
         self.__logger.info("Delete out-of-date assets!", newSection=True)
-        assets_to_be_deleted_IDs = [
-            asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs_asSet
-        ]
+        if len(persons_to_be_deleted_IDs_asSet) == 0:
+            self.__logger.info("No assets to delete!", endSection=True)
+        else:
+            assets_to_be_deleted_IDs = [
+                asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs_asSet
+            ]
 
-        payload = {
-            "unids": assets_to_be_deleted_IDs  # Convert set to list
-        }
+            payload = {
+                "unids": assets_to_be_deleted_IDs  # Convert set to list
+            }
 
-        HEADERS = {
-            "Content-Type": "application/json"
-        }
+            HEADERS = {
+                "Content-Type": "application/json"
+            }
 
-        self.__logger.info(f"Performing a POST request to {DELETE_ASSETS_ENDPOINT}!")
-        response = requests.post(
-            DELETE_ASSETS_ENDPOINT,
-            auth=(USERNAME, PASSWORD),
-            headers=HEADERS,
-            json=payload  # Automatically converts to JSON
-        )
+            self.__logger.info(f"Performing a POST request to {DELETE_ASSETS_ENDPOINT}!")
+            response = requests.post(
+                DELETE_ASSETS_ENDPOINT,
+                auth=(USERNAME, PASSWORD),
+                headers=HEADERS,
+                json=payload  # Automatically converts to JSON
+            )
 
-        categorize_status(logger=self.__logger, response=response, showResponseTextIfSuccessfull=True)
-        self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!", endSection=True)
+            categorize_status(logger=self.__logger, response=response, showResponseTextIfSuccessfull=True)
+            self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!", endSection=True)
         self.__logger.newline()
 
     def create_assets(self, persons):
         self.__logger.info("Creating new person assets!", newSection=True)
-        for person in persons:
-            self.__logger.info(f"Create {person}", newSection=True)
-            self.__create_asset(person)
-            self.__logger.info("Asset created successfully!", endSection=True)
-            self.__logger.newline()
-        self.__logger.info("Successfully created all the new person assets!", endSection=True)
+        if len(persons) == 0:
+            self.__logger.info("No new person assets!", endSection=True)
+        else:
+            for person in persons:
+                self.__logger.info(f"Create {person}", newSection=True)
+                self.__create_asset(person)
+                self.__logger.info("Asset created successfully!", endSection=True)
+                self.__logger.newline()
+            self.__logger.info("Successfully created all the new person assets!", endSection=True)
         self.__logger.newline()
 
     def __generate_assets_url(self):
