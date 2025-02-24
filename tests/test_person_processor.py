@@ -3,6 +3,7 @@ from unittest.mock import MagicMock, patch
 import requests
 from topdesk_requests.person_processor import PersonProcessor  # Adjust if needed
 import logger
+import main
 
 
 class TestPersonProcessor(unittest.TestCase):

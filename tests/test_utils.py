@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 from requests import Response
 from logger import Logger
 from topdesk_requests.utils import categorize_status, lists_union, lists_difference
-
+import main
 
 class TestUtils(unittest.TestCase):
     """Unit tests for categorize_status, lists_union, and lists_difference functions."""

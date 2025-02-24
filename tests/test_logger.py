@@ -4,6 +4,7 @@ import logging
 import os
 from datetime import datetime
 from logger import Logger  # Import the Logger class
+import main
 
 class TestLogger(unittest.TestCase):
     """Unit tests for the Logger class."""
