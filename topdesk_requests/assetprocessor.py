@@ -41,8 +41,8 @@ class AssetProcessor:
         self.__logger.info(f"Fetched {len(self.__assets)} person assets!")
         self.__log_assets()
 
-    def get_assets_persons_IDs_as_set(self):
-        return {asset["persons"] for asset in self.__assets.values()}
+    def get_assets_persons_IDs(self):
+        return [asset["persons"] for asset in self.__assets.values()]
 
     def delete_assets(self, persons_to_be_deleted_IDs_asSet):
         self.__logger.info("Delete out-of-date assets!")

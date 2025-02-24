@@ -18,3 +18,11 @@ def categorize_status(logger, response, showResponseTextIfSuccessfull=False):
         case _:
             logger.error(f"Error {response.status_code}: {response.text}")
             raise SystemExit
+
+def listsUnion(list1, list2):
+    """Returns the union of two lists as a list (removes duplicates)."""
+    return list(set(list1) | set(list2))
+
+def listsDifference(list1, list2):
+    """Returns the difference of two lists (elements in list1 but not in list2)."""
+    return list(set(list1) - set(list2))
