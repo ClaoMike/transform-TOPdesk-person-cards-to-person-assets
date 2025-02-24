@@ -68,14 +68,14 @@ def test_synchronization_logic(
     assert len(persons_to_be_created) == 1, "Bob should be created"
 
     # 🎯 Step 6: Verify Set Operations
-    assets_to_be_created_IDs = [asset["id"] for asset in persons_to_be_created]
-    synchronized_assets_IDs = [asset["id"] for asset in synchronized_persons]
+    assets_to_be_created_ids = [asset["id"] for asset in persons_to_be_created]
+    synchronized_assets_ids = [asset["id"] for asset in synchronized_persons]
 
-    persons_to_be_deleted_IDs = lists_difference(
-        ["1"], lists_union(assets_to_be_created_IDs, synchronized_assets_IDs)
+    persons_to_be_deleted_ids = lists_difference(
+        ["1"], lists_union(assets_to_be_created_ids, synchronized_assets_ids)
     )
 
-    print(f"📌 persons_to_be_deleted_IDs: {persons_to_be_deleted_IDs}")
+    print(f"📌 persons_to_be_deleted_ids: {persons_to_be_deleted_ids}")
     print(f"📌 persons_to_be_created: {persons_to_be_created}")
     print(f"📌 Expected API call to create_assets({persons_to_be_created})")
 
@@ -99,8 +99,8 @@ def test_synchronization_logic(
     ), "❌ Expected created log call not found!"
 
     # 🎯 Step 8: Verify Correct API Calls
-    if persons_to_be_deleted_IDs:
-        mock_delete_assets.assert_called_once_with(persons_to_be_deleted_IDs)
+    if persons_to_be_deleted_ids:
+        mock_delete_assets.assert_called_once_with(persons_to_be_deleted_ids)
     else:
         mock_delete_assets.assert_not_called()
 
