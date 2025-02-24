@@ -52,7 +52,7 @@ assetProcessor.create_assets(persons_to_be_created)
 # we've reached the end of the script successfully
 logger.newline()
 logger.info("Import successful!")
-
+logger.close()
 # TODO
 #
 # 1. Make a function for set operations on lists

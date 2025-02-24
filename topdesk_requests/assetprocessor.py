@@ -88,7 +88,7 @@ class AssetProcessor:
         return url
 
     def __log_assets(self):
-        self.__logger.dictionary(dict=self.__assets, dict_title="Assets")
+        self.__logger.dictionary(dict_data=self.__assets, dict_title="Assets")
 
     def __create_asset_id(self, person):
         name = person["firstName"] + " " + person["surName"] + " - " + person["email"]
