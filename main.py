@@ -50,14 +50,11 @@ assetProcessor.delete_assets(persons_to_be_deleted_IDs)
 assetProcessor.create_assets(persons_to_be_created)
 
 # we've reached the end of the script successfully
-logger.newline()
 logger.info("Import successful!")
 logger.close()
 # TODO
 #
-# 1. Make a function for set operations on lists
 # 2. Add a total at the end of the log
-# 3. See if you can also generate a markdown log, so that you can hide long data
 # 4. Fix bugs and errors
 # 5. Test everything
 # 6. Add documentation for everything

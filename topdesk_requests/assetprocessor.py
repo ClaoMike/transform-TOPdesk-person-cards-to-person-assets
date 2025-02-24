@@ -39,6 +39,8 @@ class AssetProcessor:
 
         self.__logger.info("Successfully fetched all the person assets!")
         self.__logger.info(f"Fetched {len(self.__assets)} person assets!")
+
+        self.__logger.newline()
         self.__log_assets()
 
     def get_assets_persons_IDs(self):

@@ -61,6 +61,7 @@ class PersonProcessor:
 
         self.__logger.info("Successfully fetched all the person cards!")
         self.__logger.info(f"Fetched {len(all_persons)} person cards!")
+        self.__logger.newline()
 
         self.__persons = all_persons
         self.__log_persons()
@@ -77,6 +78,8 @@ class PersonProcessor:
         self.__logger.info("Filtering is done!")
         self.__logger.info(f"Initial number of person cards: {initial_number_of_cards}!")
         self.__logger.info(f"Current number of person cards: {len(self.__persons)}!")
+
+        self.__logger.newline()
         self.__log_persons()
 
     def __generate_persons_url(self, page_start, page_size):

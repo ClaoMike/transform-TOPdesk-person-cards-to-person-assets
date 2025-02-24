@@ -56,7 +56,6 @@ class Logger:
         self._write_markdown("\n")
 
     def array(self, array, array_title="No data"):
-        self.newline()
         self.logger.info(f"{array_title}")
         self.logger.info(f"Count: {len(array)}")
 
@@ -68,7 +67,6 @@ class Logger:
         self.newline()
 
     def dictionary(self, dict_data, dict_title="No data"):
-        self.newline()
         self.logger.info(f"{dict_title}")
         self.logger.info(f"Count: {len(dict_data.items())}")
 
