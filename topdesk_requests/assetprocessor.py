@@ -74,7 +74,7 @@ class AssetProcessor:
         self.__logger.info("Creating new person assets!")
         for person in persons:
             self.__logger.info(f"Create {person}")
-            self.create_asset(person)
+            self.__create_asset(person)
             self.__logger.info("Asset created successfully!")
             self.__logger.newline()
         self.__logger.info("Successfully created all the new person assets!")
@@ -99,7 +99,7 @@ class AssetProcessor:
 
     def __create_asset(self, person):
         payload = {
-            "name": self.create_asset_id(person),
+            "name": self.__create_asset_id(person),
             "type_id": "D1C4D1A8-5C35-4981-A352-E25C7DC24D55",
             "persons": person["id"],
             "email": person["email"]
