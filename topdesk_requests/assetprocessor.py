@@ -3,22 +3,58 @@ from topdesk_requests.config import *
 from topdesk_requests.utils import *
 
 class AssetProcessor:
+    """
+        A class responsible for fetching, creating, and deleting 'person' assets on TOPdesk.
+
+        This class provides the functionality to interact with the TOPdesk API for:
+        - Fetching all 'person' assets.
+        - Deleting out-of-date 'person' assets.
+        - Creating new 'person' assets.
+
+        Attributes:
+            logger (object): A logger instance used for logging information and errors.
+            fields (list): A list of fields (strings) that should be fetched for each asset.
+            __assets (dict): Internal storage of assets as a dictionary where the key is the 'persons' field from the asset, and the value is the complete asset information.
+    """
+
     def __init__(self, logger, fields):
+        """
+            Initializes the AssetProcessor with a logger and a list of fields to fetch.
+
+           Args:
+               logger (object): The logger instance used for logging.
+               fields (list): The list of fields to be fetched for each asset.
+        """
         self.__logger = logger
         self.__assets = []
         self.__fields = fields
 
     @property
     def assets(self):
+        """
+            Returns the internal dictionary of assets.
+
+            Returns:
+                dict: A dictionary of assets keyed by the 'persons' field.
+        """
         return self.__assets
 
     def get_assets(self):
+        """
+            Fetches all existing person assets from the TOPdesk API.
+
+            This method makes a GET request to the TOPdesk endpoint defined by self.__generate_assets_url(). Upon a successful request, it stores the resulting assets in the internal dictionary (self.__assets).
+
+            Raises:
+                HTTPError: Propagated if the request fails, accompanied by logging.
+        """
         self.__logger.info("Trying to fetch all the person assets!", newSection=True)
 
         HEADERS = {
             "Content-Type": "application/json",
         }
 
+        # Construct the URL with the necessary fields
         url = self.__generate_assets_url()
 
         self.__logger.info(f"Performing a GET request to {url}!")
@@ -28,13 +64,14 @@ class AssetProcessor:
             headers=HEADERS
         )
 
-        # Check the response
+        # Categorize the response, raising an HTTPError if not successful
         categorize_status(logger=self.__logger, response=response)
 
-        # Parse response JSON
+        # Parse response JSON to obtain data
         data = response.json()
 
-        # transform the array of assets into a hash map, where each item's key is the persons value
+        # Transform the array of assets into a dictionary
+        # where the key is the 'persons' field and value is the entire asset
         self.__assets = {asset['persons']: asset for asset in data["results"]}
 
         self.__logger.info("Successfully fetched all the person assets!")
@@ -44,19 +81,32 @@ class AssetProcessor:
         self.__log_assets()
 
     def get_assets_persons_IDs(self):
+        """
+            Provides a list of 'persons' IDs from the currently fetched assets.
+
+           Returns:
+               list: A list of 'persons' values (IDs).
+        """
         return [asset["persons"] for asset in self.__assets.values()]
 
     def delete_assets(self, persons_to_be_deleted_IDs_asSet):
+        """
+            Deletes out-of-date assets using the supplied set of person IDs.
+
+            Args:
+                persons_to_be_deleted_IDs_asSet (set): A set of 'persons' IDs  that need to be deleted from the system.
+        """
         self.__logger.info("Delete out-of-date assets!", newSection=True)
         if len(persons_to_be_deleted_IDs_asSet) == 0:
             self.__logger.info("No assets to delete!", endSection=True)
         else:
+            # Gather the 'id' field of each asset that is out-of-date
             assets_to_be_deleted_IDs = [
                 asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs_asSet
             ]
 
             payload = {
-                "unids": assets_to_be_deleted_IDs  # Convert set to list
+                "unids": assets_to_be_deleted_IDs
             }
 
             HEADERS = {
@@ -68,18 +118,26 @@ class AssetProcessor:
                 DELETE_ASSETS_ENDPOINT,
                 auth=(USERNAME, PASSWORD),
                 headers=HEADERS,
-                json=payload  # Automatically converts to JSON
+                json=payload  # Automatically converts the Python dictionary to JSON
             )
 
+            # Categorize response and log outcome
             categorize_status(logger=self.__logger, response=response, showResponseTextIfSuccessfull=True)
             self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!", endSection=True)
         self.__logger.newline()
 
     def create_assets(self, persons):
+        """
+            Creates new 'person' assets in TOPdesk from a list of person dictionaries.
+
+            Args:
+                persons (list): A list of dictionaries, where each dictionary contains the data required to create an asset (e.g., 'firstName', 'surName',  'email', and 'id').
+        """
         self.__logger.info("Creating new person assets!", newSection=True)
         if len(persons) == 0:
             self.__logger.info("No new person assets!", endSection=True)
         else:
+            # Iterate over each person dict and create an asset
             for person in persons:
                 self.__logger.info(f"Create {person}", newSection=True)
                 self.__create_asset(person)
@@ -89,23 +147,53 @@ class AssetProcessor:
         self.__logger.newline()
 
     def __generate_assets_url(self):
+        """
+            Constructs the URL used to fetch assets, appending the fields to be retrieved.
+
+            Returns:
+                str: The constructed URL with the required query parameters.
+        """
+        # Start with the base endpoint, add default fields
         url = f"{ASSETS_ENDPOINT}?&field=name&field=persons"
+        # Append additional fields from self.__fields
         for i in range(len(self.__fields)):
             url = url + f"&field={self.__fields[i]}"
 
         return url
 
     def __log_assets(self):
+        """
+            Logs the current internal state of the assets dictionary using the logger.
+       """
         self.__logger.dictionary(dict_data=self.__assets, dict_title="Assets")
 
     def __create_asset_id(self, person):
+        """
+            Constructs a concise yet descriptive name for the asset from person data.
+
+           Args:
+               person (dict): The dictionary containing personal information (first name, surname, and email).
+
+            Returns:
+               str: A string serving as the 'name' field for the new asset.
+       """
+        # Concatenate firstName, surName and email
         name = person["firstName"] + " " + person["surName"] + " - " + person["email"]
+        # Truncate if the length exceeds 60 characters to meet TOPdesk's constraint
         if len(name) > 60: # Asset ID can have at most 61 characters
             name = name[:57] + "..."
 
         return name
 
     def __create_asset(self, person):
+        """
+                Sends a POST request to the TOPdesk API to create a single person asset.
+
+                Args:
+                    person (dict): The dictionary containing personal information (first name,
+                        surname, email, and id).
+                """
+        # Prepare the payload for the API request
         payload = {
             "name": self.__create_asset_id(person),
             "type_id": "D1C4D1A8-5C35-4981-A352-E25C7DC24D55",
@@ -121,7 +209,8 @@ class AssetProcessor:
             CREATE_ASSET_ENDPOINT,
             auth=(USERNAME, PASSWORD),
             headers=HEADERS,
-            json=payload  # Automatically converts to JSON
+            json=payload   # Automatically converts the Python dictionary to JSON
         )
 
+        # Handle the response outcome
         categorize_status(logger=self.__logger, response=response)
