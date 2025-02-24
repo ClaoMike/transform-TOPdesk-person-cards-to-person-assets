@@ -13,7 +13,7 @@ class AssetProcessor:
         return self.__assets
 
     def get_assets(self):
-        self.__logger.info("Trying to fetch all the person assets!")
+        self.__logger.info("Trying to fetch all the person assets!", newSection=True)
 
         HEADERS = {
             "Content-Type": "application/json",
@@ -38,7 +38,7 @@ class AssetProcessor:
         self.__assets = {asset['persons']: asset for asset in data["results"]}
 
         self.__logger.info("Successfully fetched all the person assets!")
-        self.__logger.info(f"Fetched {len(self.__assets)} person assets!")
+        self.__logger.info(f"Fetched {len(self.__assets)} person assets!", endSection=True)
 
         self.__logger.newline()
         self.__log_assets()
@@ -47,7 +47,7 @@ class AssetProcessor:
         return [asset["persons"] for asset in self.__assets.values()]
 
     def delete_assets(self, persons_to_be_deleted_IDs_asSet):
-        self.__logger.info("Delete out-of-date assets!")
+        self.__logger.info("Delete out-of-date assets!", newSection=True)
         assets_to_be_deleted_IDs = [
             asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs_asSet
         ]
@@ -69,17 +69,17 @@ class AssetProcessor:
         )
 
         categorize_status(logger=self.__logger, response=response, showResponseTextIfSuccessfull=True)
-        self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!")
+        self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!", endSection=True)
         self.__logger.newline()
 
     def create_assets(self, persons):
-        self.__logger.info("Creating new person assets!")
+        self.__logger.info("Creating new person assets!", newSection=True)
         for person in persons:
-            self.__logger.info(f"Create {person}")
+            self.__logger.info(f"Create {person}", newSection=True)
             self.__create_asset(person)
-            self.__logger.info("Asset created successfully!")
+            self.__logger.info("Asset created successfully!", endSection=True)
             self.__logger.newline()
-        self.__logger.info("Successfully created all the new person assets!")
+        self.__logger.info("Successfully created all the new person assets!", endSection=True)
         self.__logger.newline()
 
     def __generate_assets_url(self):

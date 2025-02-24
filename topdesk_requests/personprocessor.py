@@ -15,7 +15,7 @@ class PersonProcessor:
     def get_persons_with_fields(self):
         if self.__fields is not None and len(self.__fields) > 0:
             fields_as_string = ", ".join(self.__fields)
-            self.__logger.info(f"Trying to fetch all the person cards with the {fields_as_string} fields!")
+            self.__logger.info(f"Trying to fetch all the person cards with the {fields_as_string} fields!", newSection=True)
         else:
             self.__logger.info("Trying to fetch all the person cards!")
 
@@ -60,14 +60,14 @@ class PersonProcessor:
             page_start += page_size
 
         self.__logger.info("Successfully fetched all the person cards!")
-        self.__logger.info(f"Fetched {len(all_persons)} person cards!")
+        self.__logger.info(f"Fetched {len(all_persons)} person cards!", endSection=True)
         self.__logger.newline()
 
         self.__persons = all_persons
         self.__log_persons()
 
     def filter_persons(self):
-        self.__logger.info("Filtering the fetched person cards!")
+        self.__logger.info("Filtering the fetched person cards!", newSection=True)
         initial_number_of_cards = len(self.__persons)
 
         self.__persons = [
@@ -77,7 +77,7 @@ class PersonProcessor:
 
         self.__logger.info("Filtering is done!")
         self.__logger.info(f"Initial number of person cards: {initial_number_of_cards}!")
-        self.__logger.info(f"Current number of person cards: {len(self.__persons)}!")
+        self.__logger.info(f"Current number of person cards: {len(self.__persons)}!", endSection=True)
 
         self.__logger.newline()
         self.__log_persons()

@@ -36,9 +36,16 @@ class Logger:
         self.markdown_log.write(text + "\n")
         self.markdown_log.flush()
 
-    def info(self, message):
+    def info(self, message, newSection=False, endSection=False):
         self.logger.info(message)
-        self._write_markdown(f"- **INFO**: {message}")
+
+        if newSection:
+            self.add_markdown_section(f"- **INFO**: {message}")
+        elif endSection:
+            self._write_markdown(f"- **INFO**: {message}")
+            self.end_markdown_section()
+        else:
+            self._write_markdown(f"- **INFO**: {message}")
 
     def warning(self, message):
         self.logger.warning(message)
@@ -56,12 +63,19 @@ class Logger:
         self.logger.info(f"{array_title}")
         self.logger.info(f"Count: {len(array)}")
 
-        self._write_markdown(f"<details><summary><b>{array_title} (Count: {len(array)})</b></summary>\n")
-        self._write_markdown("\n```text\n" + "\n".join(map(str, array)) + "\n```\n</details>\n")
+        self.add_markdown_section(f"{array_title} (Count: {len(array)})")
+        self._write_markdown("\n```text\n" + "\n".join(map(str, array)) + "\n```\n")
+        self.end_markdown_section()
 
         for item in array:
             self.logger.info(item)
         self.newline()
+
+    def add_markdown_section(self, title):
+        self._write_markdown(f"<details><summary><b>{title}</b></summary>\n")
+
+    def end_markdown_section(self):
+        self._write_markdown("</details>\n")
 
     def dictionary(self, dict_data, dict_title="No data"):
         self.logger.info(f"{dict_title}")
