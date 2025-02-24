@@ -52,7 +52,7 @@ class PersonProcessor:
         if self.__fields is not None and len(self.__fields) > 0:
             fields_as_string = ", ".join(self.__fields)
             self.__logger.info(f"Trying to fetch all the person cards with the {fields_as_string} fields!",
-                               newSection=True)
+                               new_section=True)
         else:
             self.__logger.info("Trying to fetch all the person cards!")
 
@@ -62,7 +62,7 @@ class PersonProcessor:
         all_persons = []
 
         # Define headers for the request (ensures we get V2 format)
-        HEADERS = {
+        headers = {
             "Accept": "application/x.topdesk-collection-person-v2+json",  # Ensures v2 API response format
             "Content-Type": "application/json"
         }
@@ -79,7 +79,7 @@ class PersonProcessor:
             response = requests.get(
                 url,
                 auth=(USERNAME, PASSWORD),
-                headers=HEADERS
+                headers=headers
             )
 
             # Validate response status
@@ -101,7 +101,7 @@ class PersonProcessor:
             page_start += page_size
 
         self.__logger.info("Successfully fetched all the person cards!")
-        self.__logger.info(f"Fetched {len(all_persons)} person cards!", endSection=True)
+        self.__logger.info(f"Fetched {len(all_persons)} person cards!", end_section=True)
         self.__logger.newline()
 
         # Store the complete list of fetched persons internally
@@ -115,7 +115,7 @@ class PersonProcessor:
 
             Any record where a specified field is empty or contains an asterisk ('*') is discarded. This helps clean up invalid or incomplete data.
         """
-        self.__logger.info("Filtering the fetched person cards!", newSection=True)
+        self.__logger.info("Filtering the fetched person cards!", new_section=True)
         initial_number_of_cards = len(self.__persons)
 
         # Only keep valid persons (no empty fields and no '*' in any required field)
@@ -126,7 +126,7 @@ class PersonProcessor:
 
         self.__logger.info("Filtering is done!")
         self.__logger.info(f"Initial number of person cards: {initial_number_of_cards}!")
-        self.__logger.info(f"Current number of person cards: {len(self.__persons)}!", endSection=True)
+        self.__logger.info(f"Current number of person cards: {len(self.__persons)}!", end_section=True)
 
         self.__logger.newline()
         self.__log_persons()

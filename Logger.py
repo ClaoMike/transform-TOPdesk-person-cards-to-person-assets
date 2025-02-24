@@ -64,7 +64,7 @@ class Logger:
         self.markdown_log.write(text + "\n")
         self.markdown_log.flush()
 
-    def info(self, message, newSection=False, endSection=False):
+    def info(self, message, new_section=False, end_section=False):
         """
             Logs an info-level message to both the standard log file and the Markdown file.
 
@@ -75,14 +75,14 @@ class Logger:
 
             Args:
                message (str): The message to log.
-               newSection (bool): Start a new collapsible Markdown section. Default: False.
-               endSection (bool): Log the message and end the current Markdown section. Default: False.
+               new_section (bool): Start a new collapsible Markdown section. Default: False.
+               end_section (bool): Log the message and end the current Markdown section. Default: False.
         """
         self.logger.info(message)
 
-        if newSection:
+        if new_section:
             self.__add_markdown_section(f"{message}")
-        elif endSection:
+        elif end_section:
             self._write_markdown(f"- **INFO**: {message}")
             self.__end_markdown_section()
         else:

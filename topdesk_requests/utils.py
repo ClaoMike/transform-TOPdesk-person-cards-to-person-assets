@@ -1,13 +1,13 @@
-def categorize_status(logger, response, showResponseTextIfSuccessfull=False):
+def categorize_status(logger, response, show_response_text_if_successful=False):
     """
         Categorizes and handles the status code of an HTTP response.
 
-        This function checks the response's status code and logs or raises an error depending on whether the request was successful. By default, successful responses (2xx) are simply logged, but the complete response text can be logged with the 'showResponseTextIfSuccessfull' parameter.
+        This function checks the response's status code and logs or raises an error depending on whether the request was successful. By default, successful responses (2xx) are simply logged, but the complete response text can be logged with the 'showResponseTextIfSuccessful' parameter.
 
         Args:
             logger (object): A logging object that provides the 'info' and 'error' methods.
             response (requests.Response): The response object returned from the HTTP request.
-            showResponseTextIfSuccessfull (bool, optional): If True, the full response text will be included in the success log. Defaults to False.
+            show_response_text_if_successful (bool, optional): If True, the full response text will be included in the success log. Defaults to False.
 
         Raises:
             SystemExit: If the status code is not in the 2xx range.
@@ -16,7 +16,7 @@ def categorize_status(logger, response, showResponseTextIfSuccessfull=False):
     match response.status_code:
         case _ if 200 <= response.status_code < 300:
             # Log success, optionally including the response text
-            if showResponseTextIfSuccessfull:
+            if show_response_text_if_successful:
                 logger.info(f"Request was successful! Status code: {response.status_code}, Message: {response.text}")
             else:
                 logger.info(f"Request was successful! Status code: {response.status_code}")
@@ -34,7 +34,7 @@ def categorize_status(logger, response, showResponseTextIfSuccessfull=False):
             raise SystemExit
 
 
-def listsUnion(list1, list2):
+def lists_union(list1, list2):
     """
         Returns the union of two lists as a new list, without duplicates.
 
@@ -51,7 +51,7 @@ def listsUnion(list1, list2):
     return list(set(list1) | set(list2))
 
 
-def listsDifference(list1, list2):
+def lists_difference(list1, list2):
     """
         Returns the difference of two lists as a new list, removing duplicates.
 

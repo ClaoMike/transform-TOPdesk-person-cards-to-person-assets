@@ -25,7 +25,7 @@
 from topdesk_requests.assetprocessor import AssetProcessor
 from topdesk_requests.personprocessor import PersonProcessor
 from Logger import Logger
-from topdesk_requests.utils import listsUnion, listsDifference
+from topdesk_requests.utils import lists_union, lists_difference
 
 # Instantiate a logger that will manage both a .log file and a .md file.
 logger = Logger()
@@ -71,9 +71,9 @@ assets_to_be_created_IDs = [asset["id"] for asset in persons_to_be_created]
 synchronized_assets_IDs = [asset["id"] for asset in synchronized_persons]
 
 # Determine which assets need to be deleted by finding any asset "persons" IDs not in our to-be-created or synchronized lists
-persons_to_be_deleted_IDs = listsDifference(
-    assetProcessor.get_assets_persons_IDs(),
-    listsUnion(
+persons_to_be_deleted_IDs = lists_difference(
+    assetProcessor.get_assets_persons_ids(),
+    lists_union(
         assets_to_be_created_IDs,
         synchronized_assets_IDs
     )

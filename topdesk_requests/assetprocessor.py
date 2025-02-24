@@ -13,8 +13,8 @@ class AssetProcessor:
         - Creating new 'person' assets.
 
         Attributes:
-            logger (object): A logger instance used for logging information and errors.
-            fields (list): A list of fields (strings) that should be fetched for each asset.
+            __logger (object): A logger instance used for logging information and errors.
+            __fields (list): A list of fields (strings) that should be fetched for each asset.
             __assets (dict): Internal storage of assets as a dictionary where the key is the 'persons' field from the asset, and the value is the complete asset information.
     """
 
@@ -49,9 +49,9 @@ class AssetProcessor:
             Raises:
                 HTTPError: Propagated if the request fails, accompanied by logging.
         """
-        self.__logger.info("Trying to fetch all the person assets!", newSection=True)
+        self.__logger.info("Trying to fetch all the person assets!", new_section=True)
 
-        HEADERS = {
+        headers = {
             "Content-Type": "application/json",
         }
 
@@ -62,7 +62,7 @@ class AssetProcessor:
         response = requests.get(
             url,
             auth=(USERNAME, PASSWORD),
-            headers=HEADERS
+            headers=headers
         )
 
         # Categorize the response, raising an HTTPError if not successful
@@ -76,12 +76,12 @@ class AssetProcessor:
         self.__assets = {asset['persons']: asset for asset in data["results"]}
 
         self.__logger.info("Successfully fetched all the person assets!")
-        self.__logger.info(f"Fetched {len(self.__assets)} person assets!", endSection=True)
+        self.__logger.info(f"Fetched {len(self.__assets)} person assets!", end_section=True)
 
         self.__logger.newline()
         self.__log_assets()
 
-    def get_assets_persons_IDs(self):
+    def get_assets_persons_ids(self):
         """
             Provides a list of 'persons' IDs from the currently fetched assets.
 
@@ -90,27 +90,27 @@ class AssetProcessor:
         """
         return [asset["persons"] for asset in self.__assets.values()]
 
-    def delete_assets(self, persons_to_be_deleted_IDs_asSet):
+    def delete_assets(self, persons_to_be_deleted_IDs):
         """
-            Deletes out-of-date assets using the supplied set of person IDs.
+            Deletes out-of-date assets using the supplied list of person IDs.
 
             Args:
-                persons_to_be_deleted_IDs_asSet (set): A set of 'persons' IDs  that need to be deleted from the system.
+                persons_to_be_deleted_IDs: A set of 'persons' IDs  that need to be deleted from the system.
         """
-        self.__logger.info("Delete out-of-date assets!", newSection=True)
-        if len(persons_to_be_deleted_IDs_asSet) == 0:
-            self.__logger.info("No assets to delete!", endSection=True)
+        self.__logger.info("Delete out-of-date assets!", new_section=True)
+        if len(persons_to_be_deleted_IDs) == 0:
+            self.__logger.info("No assets to delete!", end_section=True)
         else:
             # Gather the 'id' field of each asset that is out-of-date
-            assets_to_be_deleted_IDs = [
-                asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs_asSet
+            assets_to_be_deleted_ids = [
+                asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs
             ]
 
             payload = {
-                "unids": assets_to_be_deleted_IDs
+                "unids": assets_to_be_deleted_ids
             }
 
-            HEADERS = {
+            headers = {
                 "Content-Type": "application/json"
             }
 
@@ -118,12 +118,12 @@ class AssetProcessor:
             response = requests.post(
                 DELETE_ASSETS_ENDPOINT,
                 auth=(USERNAME, PASSWORD),
-                headers=HEADERS,
+                headers=headers,
                 json=payload  # Automatically converts the Python dictionary to JSON
             )
 
             # Categorize response and log outcome
-            categorize_status(logger=self.__logger, response=response, showResponseTextIfSuccessfull=True)
+            categorize_status(logger=self.__logger, response=response, show_response_text_if_successful=True)
             self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!",
                                endSection=True)
         self.__logger.newline()
@@ -135,17 +135,17 @@ class AssetProcessor:
             Args:
                 persons (list): A list of dictionaries, where each dictionary contains the data required to create an asset (e.g., 'firstName', 'surName',  'email', and 'id').
         """
-        self.__logger.info("Creating new person assets!", newSection=True)
+        self.__logger.info("Creating new person assets!", new_section=True)
         if len(persons) == 0:
-            self.__logger.info("No new person assets!", endSection=True)
+            self.__logger.info("No new person assets!", end_section=True)
         else:
             # Iterate over each person dict and create an asset
             for person in persons:
-                self.__logger.info(f"Create {person}", newSection=True)
+                self.__logger.info(f"Create {person}", new_section=True)
                 self.__create_asset(person)
-                self.__logger.info("Asset created successfully!", endSection=True)
+                self.__logger.info("Asset created successfully!", end_section=True)
                 self.__logger.newline()
-            self.__logger.info("Successfully created all the new person assets!", endSection=True)
+            self.__logger.info("Successfully created all the new person assets!", end_section=True)
         self.__logger.newline()
 
     def __generate_assets_url(self):
@@ -203,14 +203,14 @@ class AssetProcessor:
             "email": person["email"]
         }
 
-        HEADERS = {
+        headers = {
             "Content-Type": "application/json"
         }
         self.__logger.info(f"Performing a POST request to {CREATE_ASSET_ENDPOINT}!")
         response = requests.post(
             CREATE_ASSET_ENDPOINT,
             auth=(USERNAME, PASSWORD),
-            headers=HEADERS,
+            headers=headers,
             json=payload  # Automatically converts the Python dictionary to JSON
         )
 
