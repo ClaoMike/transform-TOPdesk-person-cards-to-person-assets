@@ -3,6 +3,7 @@ from topdesk_requests.person_processor import PersonProcessor
 from topdesk_requests.asset_processor import AssetProcessor
 from logger import Logger
 from topdesk_requests.utils import lists_union, lists_difference
+# noinspection PyUnresolvedReferences
 import main
 
 

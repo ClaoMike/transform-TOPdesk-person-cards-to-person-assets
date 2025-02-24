@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import MagicMock, patch
-import requests
 from topdesk_requests.person_processor import PersonProcessor  # Adjust if needed
 import logger
+# noinspection PyUnresolvedReferences
 import main
 
 
@@ -103,8 +103,15 @@ class TestPersonProcessor(unittest.TestCase):
 
     def test_generate_persons_url(self):
         """Test that the generated URL includes correct pagination and fields."""
-        url = self.processor._PersonProcessor__generate_persons_url(page_start=0, page_size=5000)
 
+        # Ensure the processor instance is set up correctly
+        self.processor = PersonProcessor(logger=MagicMock(), fields=["id", "firstName", "surName", "email"])
+
+        # Access the private method safely
+        generate_url_method = getattr(self.processor, "_PersonProcessor__generate_persons_url")
+        url = generate_url_method(page_start=0, page_size=5000)
+
+        # Assertions
         self.assertIn("pageStart=0", url)
         self.assertIn("pageSize=5000", url)
         self.assertIn("fields=id,firstName,surName,email", url)

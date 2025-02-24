@@ -1,7 +1,6 @@
 import requests
 from topdesk_requests.config import *
 from topdesk_requests.utils import *
-import logger
 
 
 class AssetProcessor:
@@ -125,8 +124,10 @@ class AssetProcessor:
 
             # Categorize response and log outcome
             categorize_status(logger=self.__logger, response=response, show_response_text_if_successful=True)
-            self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!",
-                               endSection=True)
+            self.__logger.info(
+                "Deletion of the out-of-date assets was a success, check above for details!",
+                end_section=True
+            )
         self.__logger.newline()
 
     def create_assets(self, persons):

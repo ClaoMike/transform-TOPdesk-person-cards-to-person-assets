@@ -73,9 +73,17 @@ class TestAssetProcessor(unittest.TestCase):
 
     def test_create_asset_id_truncation(self):
         """Test truncation of asset name if it exceeds 60 characters."""
-        person = {"firstName": "Charlie", "surName": "VeryLongSurnameToExceedCharacterLimit",
-                  "email": "longemail@example.com"}
-        asset_name = self.asset_processor._AssetProcessor__create_asset_id(person)
+        person = {
+            "firstName": "Charlie",
+            "surName": "VeryLongSurnameToExceedCharacterLimit",
+            "email": "longemail@example.com"
+        }
+
+        # Use getattr to access the private method dynamically
+        create_asset_id_method = getattr(self.asset_processor, "_AssetProcessor__create_asset_id")
+
+        asset_name = create_asset_id_method(person)
+
         self.assertTrue(len(asset_name) <= 60)
         self.assertTrue(asset_name.endswith("..."))
 

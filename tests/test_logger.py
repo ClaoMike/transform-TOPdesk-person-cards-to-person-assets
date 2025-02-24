@@ -1,9 +1,10 @@
 import unittest
-from unittest.mock import patch, MagicMock, mock_open
+from unittest.mock import patch, mock_open
 import logging
 import os
 from datetime import datetime
 from logger import Logger  # Import the Logger class
+# noinspection PyUnresolvedReferences
 import main
 
 
@@ -37,7 +38,7 @@ class TestLogger(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("os.makedirs")
-    def test_logger_initializes_correctly(self, mock_makedirs, mock_open):
+    def test_logger_initializes_correctly(self, mock_makedirs, mock_open1):
         """Test if Logger creates necessary files and directories correctly."""
 
         # Reset logging before running the test
@@ -50,7 +51,7 @@ class TestLogger(unittest.TestCase):
         logging.basicConfig(level=logging.INFO)
 
         # Initialize Logger to trigger directory and file creation
-        test_logger = Logger(log_dir="test_logs")
+        Logger(log_dir="test_logs")
 
         # Print captured makedirs calls
         print(f"\n🔍 Captured makedirs calls: {mock_makedirs.call_args_list}")
@@ -65,7 +66,7 @@ class TestLogger(unittest.TestCase):
         assert expected_subdir is not None, f"❌ Expected log directory was not created! Captured: {created_dirs}"
 
         # Print all captured open file calls
-        print(f"\n📝 Captured file open calls: {mock_open.call_args_list}")
+        print(f"\n📝 Captured file open calls: {mock_open1.call_args_list}")
 
         # Verify base log directory creation
         mock_makedirs.assert_any_call(os.path.normpath("test_logs"), exist_ok=True)
@@ -73,7 +74,7 @@ class TestLogger(unittest.TestCase):
 
         # Verify markdown file is created
         expected_md_file = os.path.join(expected_subdir, os.path.basename(expected_subdir) + ".md")
-        assert any(call[0][0] == expected_md_file for call in mock_open.call_args_list), \
+        assert any(call[0][0] == expected_md_file for call in mock_open1.call_args_list), \
             f"❌ Markdown file {expected_md_file} was not opened!"
 
     ## ===========================
