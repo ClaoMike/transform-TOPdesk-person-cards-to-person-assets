@@ -31,9 +31,6 @@ class Logger:
 
         self.markdown_log = open(markdown_log_path, "w", encoding="utf-8")
 
-        # Write initial markdown metadata
-        self.markdown_log.write(f"# Log for {run_timestamp}\n\n")
-
     def _write_markdown(self, text):
         """Writes text to the markdown log file."""
         self.markdown_log.write(text + "\n")

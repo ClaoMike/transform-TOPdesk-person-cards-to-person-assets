@@ -54,7 +54,6 @@ logger.info("Import successful!")
 logger.close()
 # TODO
 #
-# 2. Add a total at the end of the log
 # 4. Fix bugs and errors
 # 5. Test everything
 # 6. Add documentation for everything
