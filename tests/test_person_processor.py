@@ -109,5 +109,6 @@ class TestPersonProcessor(unittest.TestCase):
         self.assertIn("pageSize=5000", url)
         self.assertIn("fields=id,firstName,surName,email", url)
 
+
 if __name__ == "__main__":
     unittest.main()

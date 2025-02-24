@@ -5,6 +5,7 @@ from logger import Logger
 from topdesk_requests.utils import lists_union, lists_difference
 import main
 
+
 def normalize_data(data):
     """Ensure consistency in case and structure."""
     return [{k.lower(): v for k, v in d.items()} for d in data]
@@ -16,7 +17,7 @@ def normalize_data(data):
 @patch("topdesk_requests.asset_processor.AssetProcessor.delete_assets")
 @patch("topdesk_requests.asset_processor.AssetProcessor.create_assets")
 def test_synchronization_logic(
-    mock_create_assets, mock_delete_assets, mock_get_assets, mock_filter_persons, mock_get_persons_with_fields
+        mock_create_assets, mock_delete_assets, mock_get_assets, mock_filter_persons, mock_get_persons_with_fields
 ):
     """Tests the full synchronization process with mocked API calls."""
 

@@ -3,6 +3,7 @@ from topdesk_requests.config import *
 from topdesk_requests.utils import *
 import logger
 
+
 class PersonProcessor:
     """
        A class responsible for fetching, storing, and filtering 'person' records from TOPdesk.

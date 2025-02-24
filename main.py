@@ -92,7 +92,7 @@ assetProcessor.create_assets(persons_to_be_created)
 logger.close()
 
 # TODO
-# 5. Test everything
+#
 # 7. Create workflow diagram
 # 8. Send logs somewhere
 # 9. Publish

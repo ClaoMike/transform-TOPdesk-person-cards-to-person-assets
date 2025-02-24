@@ -6,6 +6,7 @@ from datetime import datetime
 from logger import Logger  # Import the Logger class
 import main
 
+
 class TestLogger(unittest.TestCase):
     """Unit tests for the Logger class."""
 
@@ -160,6 +161,7 @@ class TestLogger(unittest.TestCase):
 
         self.mock_open().write.assert_any_call("- **INFO**: Import successful!\n")
         self.mock_open().close.assert_called()
+
 
 if __name__ == "__main__":
     unittest.main()
