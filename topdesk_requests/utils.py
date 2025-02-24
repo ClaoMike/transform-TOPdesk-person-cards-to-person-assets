@@ -1,4 +1,4 @@
-import Logger
+import logger
 from requests import Response
 
 def categorize_status(logger: Logger, response: Response, show_response_text_if_successful=False):

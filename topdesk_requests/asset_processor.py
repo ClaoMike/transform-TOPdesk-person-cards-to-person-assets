@@ -1,7 +1,7 @@
 import requests
 from topdesk_requests.config import *
 from topdesk_requests.utils import *
-import Logger
+import logger
 
 
 class AssetProcessor:
