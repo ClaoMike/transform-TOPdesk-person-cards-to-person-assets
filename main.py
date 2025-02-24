@@ -50,7 +50,6 @@ assetProcessor.delete_assets(persons_to_be_deleted_IDs)
 assetProcessor.create_assets(persons_to_be_created)
 
 # we've reached the end of the script successfully
-logger.info("Import successful!")
 logger.close()
 # TODO
 #

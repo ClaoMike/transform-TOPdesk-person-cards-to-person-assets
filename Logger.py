@@ -40,7 +40,7 @@ class Logger:
         self.logger.info(message)
 
         if newSection:
-            self.add_markdown_section(f"- **INFO**: {message}")
+            self.add_markdown_section(f"{message}")
         elif endSection:
             self._write_markdown(f"- **INFO**: {message}")
             self.end_markdown_section()
@@ -90,4 +90,8 @@ class Logger:
 
     def close(self):
         """Closes the markdown log file."""
+        end_message = "Import successful!"
+
+        self.info(end_message)
+
         self.markdown_log.close()
