@@ -2,6 +2,7 @@ import requests
 from topdesk_requests.config import *
 from topdesk_requests.utils import *
 
+
 class AssetProcessor:
     """
         A class responsible for fetching, creating, and deleting 'person' assets on TOPdesk.
@@ -123,7 +124,8 @@ class AssetProcessor:
 
             # Categorize response and log outcome
             categorize_status(logger=self.__logger, response=response, showResponseTextIfSuccessfull=True)
-            self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!", endSection=True)
+            self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!",
+                               endSection=True)
         self.__logger.newline()
 
     def create_assets(self, persons):
@@ -180,7 +182,7 @@ class AssetProcessor:
         # Concatenate firstName, surName and email
         name = person["firstName"] + " " + person["surName"] + " - " + person["email"]
         # Truncate if the length exceeds 60 characters to meet TOPdesk's constraint
-        if len(name) > 60: # Asset ID can have at most 61 characters
+        if len(name) > 60:  # Asset ID can have at most 61 characters
             name = name[:57] + "..."
 
         return name
@@ -209,7 +211,7 @@ class AssetProcessor:
             CREATE_ASSET_ENDPOINT,
             auth=(USERNAME, PASSWORD),
             headers=HEADERS,
-            json=payload   # Automatically converts the Python dictionary to JSON
+            json=payload  # Automatically converts the Python dictionary to JSON
         )
 
         # Handle the response outcome

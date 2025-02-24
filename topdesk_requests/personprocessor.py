@@ -2,6 +2,7 @@ import requests
 from topdesk_requests.config import *
 from topdesk_requests.utils import *
 
+
 class PersonProcessor:
     """
        A class responsible for fetching, storing, and filtering 'person' records from TOPdesk.
@@ -50,7 +51,8 @@ class PersonProcessor:
         # Log the fields we intend to fetch, if provided
         if self.__fields is not None and len(self.__fields) > 0:
             fields_as_string = ", ".join(self.__fields)
-            self.__logger.info(f"Trying to fetch all the person cards with the {fields_as_string} fields!", newSection=True)
+            self.__logger.info(f"Trying to fetch all the person cards with the {fields_as_string} fields!",
+                               newSection=True)
         else:
             self.__logger.info("Trying to fetch all the person cards!")
 

@@ -33,6 +33,7 @@ def categorize_status(logger, response, showResponseTextIfSuccessfull=False):
             logger.error(f"Error {response.status_code}: {response.text}")
             raise SystemExit
 
+
 def listsUnion(list1, list2):
     """
         Returns the union of two lists as a new list, without duplicates.
@@ -48,6 +49,7 @@ def listsUnion(list1, list2):
     """
     # Convert each list to a set, perform a union operation, then convert back to a list
     return list(set(list1) | set(list2))
+
 
 def listsDifference(list1, list2):
     """

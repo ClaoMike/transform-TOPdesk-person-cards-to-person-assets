@@ -2,6 +2,7 @@ import logging
 from datetime import datetime
 import os
 
+
 class Logger:
     """
         A logging utility class that writes both to a standard log file and a Markdown file.
@@ -166,7 +167,8 @@ class Logger:
         # Start a collapsible section in Markdown
         self._write_markdown(f"<details><summary><b>{dict_title} (Count: {len(dict_data)})</b></summary>\n")
         # Format the dictionary into a JSON-like fenced code block
-        self._write_markdown("\n```json\n" + "\n".join(f'"{k}": "{v}"' for k, v in dict_data.items()) + "\n```\n</details>\n")
+        self._write_markdown(
+            "\n```json\n" + "\n".join(f'"{k}": "{v}"' for k, v in dict_data.items()) + "\n```\n</details>\n")
 
         # Log each key-value pair in the standard logger
         for key, value in dict_data.items():

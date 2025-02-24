@@ -72,7 +72,7 @@ synchronized_assets_IDs = [asset["id"] for asset in synchronized_persons]
 
 # Determine which assets need to be deleted by finding any asset "persons" IDs not in our to-be-created or synchronized lists
 persons_to_be_deleted_IDs = listsDifference(
-    assetProcessor.get_assets_persons_IDs() ,
+    assetProcessor.get_assets_persons_IDs(),
     listsUnion(
         assets_to_be_created_IDs,
         synchronized_assets_IDs
@@ -93,7 +93,6 @@ logger.close()
 
 # TODO
 # 5. Test everything
-# 6. Add documentation for everything
 # 7. Create workflow diagram
 # 8. Send logs somewhere
 # 9. Publish
