@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67189ee9-3792-4cb6-8cb1-f277e05b18ba" name="Changes" comment="Add readme file">
+    <list default="true" id="67189ee9-3792-4cb6-8cb1-f277e05b18ba" name="Changes" comment="Save the IDE configuration file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739976960955</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Save the IDE configuration file">
+      <option name="closed" value="true" />
+      <created>1740408930186</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740408930186</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +165,8 @@
     <MESSAGE value="Refactor class methods into privates and publics" />
     <MESSAGE value="Add TODOs" />
     <MESSAGE value="Add readme file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add readme file" />
+    <MESSAGE value="Save the IDE configuration file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Save the IDE configuration file" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject4$Test.coverage" NAME="Test Coverage Results" MODIFIED="1740408543726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

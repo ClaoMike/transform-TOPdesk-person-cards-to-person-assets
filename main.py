@@ -93,7 +93,6 @@ logger.close()
 
 # TODO
 #
-# 7. Create workflow diagram
-# 8. Send logs somewhere
-# 9. Publish
+# 1. Create the README file
+# 2. Create workflow diagram
 #
