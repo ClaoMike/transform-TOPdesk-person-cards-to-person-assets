@@ -1,3 +1,4 @@
+# noinspection SpellCheckingInspection
 """
     This script demonstrates how to synchronize person records from TOPdesk with related 'person' assets.
 

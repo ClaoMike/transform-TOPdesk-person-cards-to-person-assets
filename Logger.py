@@ -110,10 +110,14 @@ class Logger:
 
     def newline(self):
         """
-            Inserts a newline in both the standard log stream and the Markdown file, helping visually separate log segments.
+        Inserts a newline in both the standard log stream and the Markdown file, helping visually separate log segments.
         """
-        # Write a newline to the console/file handler in the standard logger
-        self.logger.handlers[0].stream.write("\n")
+        # Ensure the handler has a stream before writing
+        for handler in self.logger.handlers:
+            if isinstance(handler, logging.StreamHandler):  # Check if it's a StreamHandler
+                handler.stream.write("\n")
+                break  # We only need to write once
+
         # Write a newline to the markdown file
         self._write_markdown("\n")
 

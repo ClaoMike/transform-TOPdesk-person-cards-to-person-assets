@@ -1,7 +1,7 @@
 import requests
 from topdesk_requests.config import *
 from topdesk_requests.utils import *
-
+import Logger
 
 class PersonProcessor:
     """
@@ -12,12 +12,12 @@ class PersonProcessor:
        - Filter out invalid or incomplete records.
 
        Attributes:
-           logger (object): A logger instance for standardized logging operations.
-           fields (list): A list of field names (strings) to be retrieved for each person.
+           __logger (object): A logger instance for standardized logging operations.
+           __fields (list): A list of field names (strings) to be retrieved for each person.
            __persons (list): Internal storage of all fetched person records.
     """
 
-    def __init__(self, logger, fields):
+    def __init__(self, logger: Logger, fields):
         """
             Initializes the PersonProcessor with a logger and a list of fields to fetch.
 

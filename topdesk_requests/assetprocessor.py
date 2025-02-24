@@ -1,6 +1,7 @@
 import requests
 from topdesk_requests.config import *
 from topdesk_requests.utils import *
+import Logger
 
 
 class AssetProcessor:
@@ -18,7 +19,7 @@ class AssetProcessor:
             __assets (dict): Internal storage of assets as a dictionary where the key is the 'persons' field from the asset, and the value is the complete asset information.
     """
 
-    def __init__(self, logger, fields):
+    def __init__(self, logger: Logger, fields):
         """
             Initializes the AssetProcessor with a logger and a list of fields to fetch.
 
@@ -27,7 +28,7 @@ class AssetProcessor:
                fields (list): The list of fields to be fetched for each asset.
         """
         self.__logger = logger
-        self.__assets = []
+        self.__assets: dict = {}
         self.__fields = fields
 
     @property
@@ -90,20 +91,20 @@ class AssetProcessor:
         """
         return [asset["persons"] for asset in self.__assets.values()]
 
-    def delete_assets(self, persons_to_be_deleted_IDs):
+    def delete_assets(self, persons_to_be_deleted_ids):
         """
             Deletes out-of-date assets using the supplied list of person IDs.
 
             Args:
-                persons_to_be_deleted_IDs: A set of 'persons' IDs  that need to be deleted from the system.
+                persons_to_be_deleted_ids: A set of 'persons' IDs  that need to be deleted from the system.
         """
         self.__logger.info("Delete out-of-date assets!", new_section=True)
-        if len(persons_to_be_deleted_IDs) == 0:
+        if len(persons_to_be_deleted_ids) == 0:
             self.__logger.info("No assets to delete!", end_section=True)
         else:
             # Gather the 'id' field of each asset that is out-of-date
             assets_to_be_deleted_ids = [
-                asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_IDs
+                asset["id"] for _, asset in self.__assets.items() if asset["persons"] in persons_to_be_deleted_ids
             ]
 
             payload = {
@@ -169,7 +170,8 @@ class AssetProcessor:
        """
         self.__logger.dictionary(dict_data=self.__assets, dict_title="Assets")
 
-    def __create_asset_id(self, person):
+    @staticmethod
+    def __create_asset_id(person):
         """
             Constructs a concise yet descriptive name for the asset from person data.
 
@@ -197,7 +199,7 @@ class AssetProcessor:
                 """
         # Prepare the payload for the API request
         payload = {
-            "name": self.__create_asset_id(person),
+            "name": AssetProcessor.__create_asset_id(person),
             "type_id": "D1C4D1A8-5C35-4981-A352-E25C7DC24D55",
             "persons": person["id"],
             "email": person["email"]

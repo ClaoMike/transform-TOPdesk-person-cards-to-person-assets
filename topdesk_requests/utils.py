@@ -1,4 +1,7 @@
-def categorize_status(logger, response, show_response_text_if_successful=False):
+import Logger
+from requests import Response
+
+def categorize_status(logger: Logger, response: Response, show_response_text_if_successful=False):
     """
         Categorizes and handles the status code of an HTTP response.
 
