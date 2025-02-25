@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67189ee9-3792-4cb6-8cb1-f277e05b18ba" name="Changes" comment="Prepared the README file">
-      <change afterPath="$PROJECT_DIR$/delete_all_assets.py" afterDir="false" />
+    <list default="true" id="67189ee9-3792-4cb6-8cb1-f277e05b18ba" name="Changes" comment="Updated the TODO list">
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagrams/personCardToAssetImport.png" beforeDir="false" afterPath="$PROJECT_DIR$/diagrams/personCardToAssetImport.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +114,7 @@
       <workItem from="1739885078790" duration="7141000" />
       <workItem from="1739948934757" duration="25784000" />
       <workItem from="1740387382324" duration="750000" />
-      <workItem from="1740471141191" duration="12778000" />
+      <workItem from="1740471141191" duration="13034000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup">
       <option name="closed" value="true" />
@@ -174,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740486443753</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated the TODO list">
+      <option name="closed" value="true" />
+      <created>1740494912510</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1740494912510</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,9 +192,9 @@
     <MESSAGE value="Add TODOs" />
     <MESSAGE value="Add readme file" />
     <MESSAGE value="Save the IDE configuration file" />
-    <MESSAGE value="Updated the TODO list" />
     <MESSAGE value="Prepared the README file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Prepared the README file" />
+    <MESSAGE value="Updated the TODO list" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the TODO list" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject4$Test.coverage" NAME="Test Coverage Results" MODIFIED="1740408543726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
