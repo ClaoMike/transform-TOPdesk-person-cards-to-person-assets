@@ -93,6 +93,6 @@ logger.close()
 
 # TODO
 #
-# 1. Create the README file
-# 2. Create workflow diagram
+# 1. Create the delete all assets script.
+# 2. Update the README file with a white background workflow and details about the delete all assets script.
 #
