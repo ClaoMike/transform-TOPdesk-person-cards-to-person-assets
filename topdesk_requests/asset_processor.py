@@ -49,7 +49,7 @@ class AssetProcessor:
             Raises:
                 HTTPError: Propagated if the request fails, accompanied by logging.
         """
-        self.__logger.info("Trying to fetch all the person assets!", new_section=True)
+        self.__logger.info("Trying to fetch all the person assets!")
 
         headers = {
             "Content-Type": "application/json",
@@ -76,7 +76,7 @@ class AssetProcessor:
         self.__assets = {asset['persons']: asset for asset in data["results"]}
 
         self.__logger.info("Successfully fetched all the person assets!")
-        self.__logger.info(f"Fetched {len(self.__assets)} person assets!", end_section=True)
+        self.__logger.info(f"Fetched {len(self.__assets)} person assets!")
 
         self.__logger.newline()
         self.__log_assets()
@@ -97,9 +97,9 @@ class AssetProcessor:
             Args:
                 persons_to_be_deleted_ids: A set of 'persons' IDs  that need to be deleted from the system.
         """
-        self.__logger.info("Delete out-of-date assets!", new_section=True)
+        self.__logger.info("Delete out-of-date assets!")
         if len(persons_to_be_deleted_ids) == 0:
-            self.__logger.info("No assets to delete!", end_section=True)
+            self.__logger.info("No assets to delete!")
         else:
             # Gather the 'id' field of each asset that is out-of-date
             assets_to_be_deleted_ids = [
@@ -137,17 +137,17 @@ class AssetProcessor:
             Args:
                 persons (list): A list of dictionaries, where each dictionary contains the data required to create an asset (e.g., 'firstName', 'surName',  'email', and 'id').
         """
-        self.__logger.info("Creating new person assets!", new_section=True)
+        self.__logger.info("Creating new person assets!")
         if len(persons) == 0:
-            self.__logger.info("No new person assets!", end_section=True)
+            self.__logger.info("No new person assets!")
         else:
             # Iterate over each person dict and create an asset
             for person in persons:
-                self.__logger.info(f"Create {person}", new_section=True)
+                self.__logger.info(f"Create {person}")
                 self.__create_asset(person)
-                self.__logger.info("Asset created successfully!", end_section=True)
+                self.__logger.info("Asset created successfully!")
                 self.__logger.newline()
-            self.__logger.info("Successfully created all the new person assets!", end_section=True)
+            self.__logger.info("Successfully created all the new person assets!")
         self.__logger.newline()
 
     def __generate_assets_url(self):
