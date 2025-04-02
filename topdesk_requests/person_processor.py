@@ -117,10 +117,12 @@ class PersonProcessor:
         self.__logger.info("Filtering the fetched person cards!")
         initial_number_of_cards = len(self.__persons)
 
-        # Only keep valid persons (no empty fields and no '*' in any required field)
         self.__persons = [
             person for person in self.__persons
-            if not any(person[field] == "" or "*" in person[field] for field in self.__fields)
+            if all(
+                person.get(field) not in (None, "") and "*" not in str(person.get(field))
+                for field in self.__fields
+            )
         ]
 
         self.__logger.info("Filtering is done!")

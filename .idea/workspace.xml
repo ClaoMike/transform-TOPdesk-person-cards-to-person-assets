@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67189ee9-3792-4cb6-8cb1-f277e05b18ba" name="Changes" comment="Added MIT License">
+    <list default="true" id="67189ee9-3792-4cb6-8cb1-f277e05b18ba" name="Changes" comment="Update logging">
+      <change afterPath="$PROJECT_DIR$/azure_script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/topdesk_requests/asset_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/topdesk_requests/asset_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/topdesk_requests/person_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/topdesk_requests/person_processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +122,7 @@
       <workItem from="1740495687665" duration="27000" />
       <workItem from="1740573074545" duration="28000" />
       <workItem from="1743581403823" duration="146000" />
-      <workItem from="1743581559343" duration="1055000" />
+      <workItem from="1743581559343" duration="6090000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup">
       <option name="closed" value="true" />
@@ -193,7 +196,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740495164991</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Update logging">
+      <option name="closed" value="true" />
+      <created>1743583055098</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1743583055098</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,13 +219,14 @@
     <MESSAGE value="Prepared the README file" />
     <MESSAGE value="Updated the TODO list" />
     <MESSAGE value="Added MIT License" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added MIT License" />
+    <MESSAGE value="Update logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update logging" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject4$Test.coverage" NAME="Test Coverage Results" MODIFIED="1740408543726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonProject4$assetprocessor.coverage" NAME="assetprocessor Coverage Results" MODIFIED="1740387946509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/topdesk_requests" />
     <SUITE FILE_PATH="coverage/PythonProject4$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1740408891868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\ClaJec0\PycharmProjects\PythonProject4" />
     <SUITE FILE_PATH="coverage/PythonProject4$main.coverage" NAME="main Coverage Results" MODIFIED="1740387964704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PythonProject4$Import.coverage" NAME="Import Coverage Results" MODIFIED="1743581472650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PythonProject4$Import.coverage" NAME="Import Coverage Results" MODIFIED="1743595926862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

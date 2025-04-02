@@ -124,10 +124,7 @@ class AssetProcessor:
 
             # Categorize response and log outcome
             categorize_status(logger=self.__logger, response=response, show_response_text_if_successful=True)
-            self.__logger.info(
-                "Deletion of the out-of-date assets was a success, check above for details!",
-                end_section=True
-            )
+            self.__logger.info("Deletion of the out-of-date assets was a success, check above for details!")
         self.__logger.newline()
 
     def create_assets(self, persons):
@@ -183,7 +180,7 @@ class AssetProcessor:
                str: A string serving as the 'name' field for the new asset.
        """
         # Concatenate firstName, surName and email
-        name = person["firstName"] + " " + person["surName"] + " - " + person["email"]
+        name = person["firstName"] + " " + person["surName"] + " / " + person["employeeNumber"] + " / " + person["location"]["name"]
         # Truncate if the length exceeds 60 characters to meet TOPdesk's constraint
         if len(name) > 60:  # Asset ID can have at most 61 characters
             name = name[:57] + "..."
@@ -203,7 +200,8 @@ class AssetProcessor:
             "name": AssetProcessor.__create_asset_id(person),
             "type_id": "D1C4D1A8-5C35-4981-A352-E25C7DC24D55",
             "persons": person["id"],
-            "email": person["email"]
+            "email": person["email"],
+            "location": person["location"]["name"]
         }
 
         headers = {

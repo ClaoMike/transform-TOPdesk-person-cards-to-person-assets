@@ -36,7 +36,7 @@ persons_to_be_created = []
 synchronized_persons = []
 
 # Define the fields we want to retrieve for each person
-person_fields = ["firstName", "surName", "email", "id", "employeeNumber"]
+person_fields = ["firstName", "surName", "email", "id", "employeeNumber", "location", "branch"]
 
 # Instantiate the PersonProcessor with the required fields
 person_processor = PersonProcessor(logger=logger, fields=person_fields)
@@ -92,7 +92,5 @@ assetProcessor.create_assets(persons_to_be_created)
 logger.close()
 
 # TODO
-#
-# 1. Create the delete all assets script.
 # 2. Update the README file with a white background workflow and details about the delete all assets script.
 #
